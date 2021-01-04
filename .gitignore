@@ -1,0 +1,6 @@
+apanel/*
+!apanel/index.php
+!apanel/assets/
+!apanel/secure/
+
+
