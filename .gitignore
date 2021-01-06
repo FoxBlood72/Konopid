@@ -6,4 +6,6 @@ apanel/*
 !apanel/login.php
 !apanel/logout.php
 config.php
+!apanel/admin.php
+!apanel/webparts
 

@@ -32,10 +32,9 @@ class KonopidDatabaseAdmin extends DataBaseKonopidBase{
     {
         $hpassword = password_hash($newpass, PASSWORD_DEFAULT);
         $payload = array(":username" => $username, ":newpass" => $hpassword);
-        $stmt = $this->odb->prepare("UPDATE `admins` SET password = :newpass");
+        $stmt = $this->odb->prepare("UPDATE `admins` SET password = :newpass WHERE username = :username");
         $stmt->execute($payload);
     }
-
 }
 
 $admindb = new KonopidDatabaseAdmin($USERNAME, $PASSWORD, $DB_NAME, $HOST, $PORT);

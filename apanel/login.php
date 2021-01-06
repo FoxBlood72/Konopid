@@ -47,7 +47,7 @@ require 'p_req/login.php';
                         </div>
                         <div class="form-group text-left">
                             <label for="password">Password</label>
-                            <input name="pwd" class="form-control" placeholder="Password" required>
+                            <input name="pwd" type="password" class="form-control" placeholder="Password" required>
                         </div>
                         
                         <button type="submit" class="btn btn-primary shadow-2 mb-4">Login</button>
