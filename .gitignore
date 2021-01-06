@@ -2,5 +2,8 @@ apanel/*
 !apanel/index.php
 !apanel/assets/
 !apanel/secure/
-
+!apanel/p_req
+!apanel/login.php
+!apanel/logout.php
+config.php
 
