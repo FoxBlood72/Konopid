@@ -1,16 +1,33 @@
 <?php 
 require_once 'webparts/header.php';
+require_once 'p_req/addgame.php';
 ?>
         <div class="page-title">
             <h3>Add Template Game Page</h3>
         </div>
         <div class="row">
             <div class="col-lg-12">
+                <?php
+                if(isset($uploaderr) && $uploaderr !== 0)
+                {
+                ?>
+                <div class="alert alert-danger" role="alert"><?php echo htmlspecialchars($uploaderr, ENT_QUOTES, 'UTF-8');?></div>
+                <?php 
+                }
+                else
+                if(isset($_GET['success']) && $_GET['success'] == 1)
+                {
+                ?>
+                <div class="alert alert-success" role="alert"><?php echo "Game added!"?></div>
+                <?php
+                }
+                ?>
+
                 <div class="card">
                     <div class="card-header">Add Game</div>
                     <div class="card-body">
                         <h5 class="card-title">Create a template game by inputing the following informations.</h5>
-                        <form accept-charset="utf-8">
+                        <form accept-charset="utf-8" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="game">Game Name</label>
                                 <input name="gamename" placeholder="Name of the game" class="form-control" required="">
@@ -24,13 +41,13 @@ require_once 'webparts/header.php';
                                 <label for="file_upload">Upload a front image. You can edit the image after you done the game</label>
                                 <br>
                                 <div class="custom-file mb-3" style="width:45%;">
-                                    <input type="file" class="custom-file-input" id="customFile" name="filename">
+                                    <input type="file" class="custom-file-input" id="customFile" name="fileg">
                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <input type="submit" class="btn btn-primary" value="Submit the game">
+                                <input name="submitg" type="submit" class="btn btn-primary" value="Submit the game">
                             </div>
                         </form>
                     </div>
@@ -62,17 +79,24 @@ require_once 'webparts/header.php';
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                <?php 
+                                $rows = $admindb->getGames();
+                                foreach($rows as $row)
+                                {
+                                ?>
                                 <tr role="row" class="odd">
-                                    <td class="dtr-control sorting_1" tabindex="0">Doris Greene</td>
-                                    <td>ms.greene@outlook.com</td>
-                                    <td>Writer</td>
-                                    <td>Active</td>
+                                    <td class="dtr-control sorting_1" tabindex="0"><?php echo htmlspecialchars($row['gamename'], ENT_QUOTES, 'UTF-8');?></td>
+                                    <td><?php echo htmlspecialchars($row['description'], ENT_QUOTES, 'UTF-8');?></td>
+                                    <td><?php echo htmlspecialchars($row['url'], ENT_QUOTES, 'UTF-8');?></td>
+                                    <td><?php echo htmlspecialchars($row['active'] ? "Active" : "Down", ENT_QUOTES, 'UTF-8');?></td>
                                     <td class="text-right">
                                         <a href="" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
                                         <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
+                                <?php 
+                                }
+                                ?>
                                 
                             </tbody>
                         </table></div></div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">Showing 1 to 7 of 7 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="dataTables-example_previous"><a href="#" aria-controls="dataTables-example" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="dataTables-example" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item next disabled" id="dataTables-example_next"><a href="#" aria-controls="dataTables-example" data-dt-idx="2" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>

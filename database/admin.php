@@ -35,6 +35,28 @@ class KonopidDatabaseAdmin extends DataBaseKonopidBase{
         $stmt = $this->odb->prepare("UPDATE `admins` SET password = :newpass WHERE username = :username");
         $stmt->execute($payload);
     }
+
+    function uploadGame($gamename, $gamedesc, $photopath)
+    {
+        $payload = array(":gamename" => $gamename, ":gamedesc" => $gamedesc, ":photopath" => $photopath);
+        $stmt = $this->odb->prepare("INSERT INTO games VALUES(NULL, :gamename, :gamedesc, :photopath, 0)");
+        $stmt->execute($payload);
+    }
+
+    function getGame($game_name)
+    {
+        $payload = array(":gamename" => $game_name);
+        $stmt = $this->odb->prepare("SELECT * FROM games WHERE gamename = :gamename");
+        $stmt->execute($payload);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    function getGames()
+    {
+        $stmt = $this->odb->query("SELECT * FROM games");
+        return $stmt;
+    }
+
 }
 
 $admindb = new KonopidDatabaseAdmin($USERNAME, $PASSWORD, $DB_NAME, $HOST, $PORT);

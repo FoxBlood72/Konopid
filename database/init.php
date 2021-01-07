@@ -18,10 +18,17 @@ class DataBaseKonopidBase{
         $this->odb->query('CREATE TABLE IF NOT EXISTS `games`
         (`ID` int(6) AUTO_INCREMENT NOT NULL PRIMARY KEY,
          `gamename` VARCHAR(100) NOT NULL,
-         `url` VARCHAR(100) NOT NULL,
-         `description` VARCHAR(400) NOT NULL
+         `description` VARCHAR(100) NOT NULL,
+         `url` VARCHAR(400) NOT NULL,
+         `active` int(6) NOT NULL
          )');
     }
+
+    function to_array()
+    {
+        
+    }
+
 }
 
 
