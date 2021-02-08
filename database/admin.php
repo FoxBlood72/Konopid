@@ -57,6 +57,29 @@ class KonopidDatabaseAdmin extends DataBaseKonopidBase{
         return $stmt;
     }
 
+    function removeGame($id)
+    {
+        $payload = array(":id" => $id);
+        $stmt = $this->odb->prepare("SELECT ID, url FROM games WHERE ID = :id");
+        $stmt->execute($payload);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if(!$row)
+            return false;
+        
+        $stmt = $this->odb->prepare("DELETE FROM games WHERE ID = :id");
+        $stmt->execute($payload);
+        unlink('../images/games/' . $row['url']);
+
+        return true;
+    }
+
+    function modifyGame($id, $gametitle, $gamedesc, $active)
+    {
+        $payload = array(":id" => $id, ":gamename" => $gametitle, ":desc" => $gamedesc, ":act" => $active);
+        $stmt = $this->odb->prepare("UPDATE games SET gamename = :gamename, description = :desc, active = :act WHERE ID = :id ");
+        $stmt->execute($payload);
+    }
+
 }
 
 $admindb = new KonopidDatabaseAdmin($USERNAME, $PASSWORD, $DB_NAME, $HOST, $PORT);

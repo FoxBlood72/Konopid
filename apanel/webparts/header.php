@@ -1,7 +1,8 @@
 <?php 
 include 'secure/init.php';
 include '../database/admin.php';
-include 'p_req/addgame.php';
+require_once 'p_req/addgame.php';
+require_once 'p_req/removegame.php';
 
 
 ?>
