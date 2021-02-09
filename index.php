@@ -12,59 +12,18 @@
     <div class="default">
         <nav>
             <ul class="deful">
-                <li><a href="index.html#pg1">Home</a></li>
-                <li><a href="index.html#pg2">Games</a></li>
-                <li><a href="index.html#pg3">Special</a></li>
-                <li><a href="index.html#pg4">Social</a></li>
-                <li><a href="index.html#pg4">Contact</a></li>
+                <li><a href="index.php#pg1">Home</a></li>
+                <li><a href="index.php#pg2">Games</a></li>
+                <li><a href="index.php#pg3">Special</a></li>
+                <li><a href="index.php#pg4">Social</a></li>
+                <li><a href="index.php#pg4">Contact</a></li>
             </ul>
         </nav>
 
         <div class="main">
-            <div class="rowgrid">
-                <div class="columngrid">
-                    <div class="imgcontainer">
-                        <img class="timage" src="images/games/chess.jpg">
-                        <div class="middle">
-                            <div class="ttext">CHESS</div>
-                          </div>
-                    </div>
-                    <div class="imgcontainer">
-                        <img class="timage" src="images/games/chicken.jpg">
-                        <div class="middle">
-                            <div class="ttext">CHICKEN INVADER</div>
-                          </div>
-                    </div>
-                    <div class="imgcontainer">
-                        <img class="timage" src="images/games/worms.jpg">
-                        <div class="middle">
-                            <div class="ttext">WORMS WAR</div>
-                          </div>
-                    </div>
-                </div>
-                <div class="columngrid">
-                    <div class="imgcontainer">
-                        <img class="timage" src="images/games/woodcuter.jpg">
-                        <div class="middle">
-                            <div class="ttext">WOOD CUTER</div>
-                          </div>
-                    </div>
-                    <div class="imgcontainer">
-                        <a href="#test"><img class="timage" src="images/games/towercastel.png"></a>
-                        <div class="middle">
-                            <div class="ttext"><a href="#test">TOWERCASTEL</a></div>
-                          </div>
-                    </div>
-                </div>
-                <div class="columngrid">
-                    <div class="imgcontainer">
-                        <a href="#test"><img class="timage" src="images/games/mario.png"></a>
-                        <div class="middle">
-                            <div class="ttext"><a href="#test">MARIO</a></div>
-                          </div>
-                    </div>
-                </div>
-            </div>
+            <?php 
+            require_once 'website_parts/displaygames.php';
+            ?>
 
         </div>
         

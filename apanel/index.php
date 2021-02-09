@@ -149,6 +149,8 @@ $(document).on("click", ".openModalDialog", function () {
      var description = $(this).data('description');
      var title = $(this).data('title');
      var active = $(this).data('active');
+     $("#alertmsg").css('display', 'none');
+     $("#successmsg").css('display', 'none');
      $("#titlegame").val( title );
      $("#gamedesc").val( description );
      $("#activeform").val( active );

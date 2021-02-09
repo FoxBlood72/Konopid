@@ -11,6 +11,8 @@ html, body{
     right: 0px;
     left: 0px;
     margin: 0px;
+    display:flex; 
+    flex-direction:column; 
 }
 
 body{
@@ -70,6 +72,7 @@ body{
   }
 
 .footer {
+    clear: both;
     width: 100%;
     background-color:black;
     color: white;
@@ -78,6 +81,9 @@ body{
     padding-top: 0.25%;
     bottom: 0;
     left: 0;
+    position: relative;
+    margin-top: auto;
+   
   }
 
 

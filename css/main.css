@@ -60,6 +60,7 @@
 .ttext {
     font-size: 40px;
     color: rgb(172, 0, 37);
+    cursor:default;
 }
 
 .ttext a{
