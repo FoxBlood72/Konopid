@@ -1,5 +1,7 @@
 <?php 
+defined('ADMINLOGED') or die();
 require_once '../database/admin.php';
+
 
 if(isset($_POST['cpwd']) && isset($_POST['npwd']))
 {

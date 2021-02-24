@@ -1,9 +1,8 @@
 <?php 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
+defined('ADMINLOGED') or die();
 require_once '../database/admin.php';
+
+
 if(isset($_GET['del']))
 {
     $id = $_GET['del'];

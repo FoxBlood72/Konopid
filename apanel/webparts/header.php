@@ -1,5 +1,6 @@
 <?php 
 include 'secure/init.php';
+define('ADMINLOGED', true);
 include '../database/admin.php';
 require_once 'p_req/addgame.php';
 require_once 'p_req/removegame.php';

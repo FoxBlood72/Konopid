@@ -68,14 +68,32 @@ class KonopidDatabaseAdmin extends DataBaseKonopidBase{
         
         $stmt = $this->odb->prepare("DELETE FROM games WHERE ID = :id");
         $stmt->execute($payload);
-        unlink('../images/games/' . $row['url']);
+        if(file_exists('../images/games/' . $row['url']))
+            unlink('../images/games/' . $row['url']);
+        if(file_exists('../games/' . $row['gamename']))
+            rmdir('../games/' . $row['gamename']);
 
         return true;
     }
 
+    function getGameById($id) {
+        $payload = array(":id" => $id);
+        $stmt = $this->odb->prepare("SELECT * FROM games WHERE ID = :id");
+        $stmt->execute($payload);
+        
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     function modifyGame($id, $gametitle, $gamedesc, $active)
     {
-        $payload = array(":id" => $id, ":gamename" => $gametitle, ":desc" => $gamedesc, ":act" => $active);
+        $payload = array(":gamename" => $gametitle, ":desc" => $gamedesc, ":act" => $active, ":id" => $id);
+        $row = $this->getGameById($id);
+        if($gametitle !== $row['gamename'])
+        {
+            rename('../../games/' . $row['gamename'], '../../games/' . $gametitle);
+        }
+
+
         $stmt = $this->odb->prepare("UPDATE games SET gamename = :gamename, description = :desc, active = :act WHERE ID = :id ");
         $stmt->execute($payload);
     }

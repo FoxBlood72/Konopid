@@ -81,10 +81,11 @@ body{
     padding-top: 0.25%;
     bottom: 0;
     left: 0;
-    position: relative;
+    position: fixed;  
     margin-top: auto;
    
   }
+  
 
 
 

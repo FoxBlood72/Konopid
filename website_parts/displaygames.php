@@ -7,6 +7,9 @@ $rows = $userdb->getGames();
 $rowscount = $rows->rowCount();
 $percolumn = intdiv($rowscount, $COLUMS);
 $reminder = $rowscount % $COLUMS;
+
+$percolumn = $percolumn === 0 ? 1 : $percolumn;
+
 ?>
 <div class="rowgrid">
 
@@ -21,16 +24,19 @@ $reminder = $rowscount % $COLUMS;
 
             for($j = 1; $j <= $percolumn + $reminder_plus; $j++)
             {
+                
                 $row = $rows->fetch(PDO::FETCH_ASSOC);
                 if($row)
                 {
                 ?>
-                    <div class="imgcontainer">
-                        <img class="timage" src="images/games/<?php echo htmlspecialchars($row['url'], ENT_QUOTES, 'UTF-8'); ?>">
-                        <div class="middle">
-                            <div class="ttext"><?php echo htmlspecialchars($row['gamename'], ENT_QUOTES, 'UTF-8');?></div>
+                    <a href="games/<?php echo $row['gamename']; ?>/">
+                        <div class="imgcontainer">
+                            <img class="timage" src="images/games/<?php echo htmlspecialchars($row['url'], ENT_QUOTES, 'UTF-8'); ?>">
+                            <div class="middle">
+                                <div class="ttext"><?php echo htmlspecialchars($row['gamename'], ENT_QUOTES, 'UTF-8');?></div>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 <?php 
                 }
                 if($reminder !== 0 && $reminder_plus_check)

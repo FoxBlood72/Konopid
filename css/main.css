@@ -3,6 +3,7 @@
     margin-top: 5%;
     left: 50%;
     margin-bottom: 5%;
+    
 }
 
 .rowgrid {
@@ -60,10 +61,19 @@
 .ttext {
     font-size: 40px;
     color: rgb(172, 0, 37);
-    cursor:default;
+    cursor:pointer;
 }
 
 .ttext a{
     color: rgb(172, 0, 37);
     text-decoration: none;
+}
+.maincanvas{
+    width: 1000px;
+    margin:0 auto;
+}
+
+#canv{
+    border: 1px solid black;
+    background-color: white;
 }

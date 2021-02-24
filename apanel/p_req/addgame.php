@@ -1,8 +1,10 @@
 <?php 
-
+defined('ADMINLOGED') or die();
 require_once '../database/admin.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-// Check if image file is a actual image or fake image
 
 if(isset($_POST["submitg"]) && isset($_POST['gamename']) && isset($_POST['descgame'])) {
     
@@ -22,25 +24,25 @@ if(isset($_POST["submitg"]) && isset($_POST['gamename']) && isset($_POST['descga
 
         
         if($check !== false) {
-            // "File is an image - " . $check["mime"] . ".";
+            
             $uploaderr = 0;
         } else {
-            // "File is not an image.";
+            
             $uploaderr = "The gived file is not an image";
         }
 
-        // Check file size
+        
         if ($_FILES["fileg"]["size"] > 500000) {
-            //echo "Sorry, your file is too large.";
+            
             $uploaderr = "Your file is too large";
         }
         
         
-        // Allow certain file formats
+        
         
         if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
         && $imageFileType != "gif" ) {
-            //echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            
             $uploaderr = "Only JPG, JPEG, PNG or GIF files are allowed";
         }
 
@@ -50,7 +52,7 @@ if(isset($_POST["submitg"]) && isset($_POST['gamename']) && isset($_POST['descga
         }
         
         
-        // Check if $uploaderr is set to 0 
+        
         if ($uploaderr === 0) {
             if (!move_uploaded_file($_FILES["fileg"]["tmp_name"], $target_file)) {
                 //echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
@@ -58,6 +60,18 @@ if(isset($_POST["submitg"]) && isset($_POST['gamename']) && isset($_POST['descga
                 }
             
             $admindb->uploadGame($_POST['gamename'], $_POST['descgame'], $file_name);
+
+            if(!file_exists('../games/'))
+                if(!mkdir('../games', 0755))
+                    die('Cannot create the \'games/\' folder, please grant permission to the following folder: main directory');
+            
+            if(!file_exists('../games/' . $_POST['gamename']))
+                if(!mkdir('../games/' . $_POST['gamename'], 0755))
+                    die('Cannot create the folder! Please grant permission to the following folder: games');
+                
+            copy('templates/phptemplate', '../games/' .$_POST['gamename'] . '/index.php');
+            copy('templates/scripttemplate', '../games/' .$_POST['gamename'] . '/script.js');
+                
             header("Location: index.php?success=1");
             die();
         } 
