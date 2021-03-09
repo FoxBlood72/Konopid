@@ -2,8 +2,6 @@
 define('fromgames', true);
 include '../../website_parts/header.php';
 
-
-
 ?>
 
 <div class="main">

@@ -44,6 +44,16 @@
             removePlayerHtml(message);
         });
 
+        room.onMessage("owner_it", (message) => {
+            console.log("You are the owner now!");
+            showStartButton();
+        });
+
+        room.onMessage("not_owner", (message) => {
+            console.log("You are not the owner!");
+            showWaitingMessage();
+        });
+
         room.onStateChange(function(state) {
             console.log("state change: ", state)
         });
@@ -64,17 +74,35 @@
     }
 
     function create () {
-          client.create('konodraw', { session: "<?php echo htmlspecialchars($_SESSION['lobby_' . GAMENAME], ENT_QUOTES, 'UTF-8'); ?>", nickname: <?php echo '"' . htmlspecialchars($_SESSION['nickname'], ENT_QUOTES, 'UTF-8') . '"'; ?>  }).then((r) => {
+          client.joinOrCreate('konodraw', { session: "<?php echo htmlspecialchars($_SESSION['lobby_' . GAMENAME], ENT_QUOTES, 'UTF-8'); ?>", nickname: <?php echo '"' . htmlspecialchars($_SESSION['nickname'], ENT_QUOTES, 'UTF-8') . '"'; ?>  }).then((r) => {
               room = r
               addListeners(room);
           });
     }
 
+    function showStartButton()
+    {
+        document.getElementById("waiting_message").style.display = "none";
+        document.getElementById("start_game").style.display = "block";
+    }
+
+    function showWaitingMessage()
+    {
+        document.getElementById("waiting_message").style.display = "block";
+        document.getElementById("start_game").style.display = "none";
+    }
+
       <?php 
     if($create)
-        echo 'create()';
+    {
+        echo 'create();';
+        echo 'showStartButton();';
+    }
     else
-        echo 'join()';
+    {
+        echo 'join();';
+        echo 'showWaitingMessage();';
+    }
       ?>
 
 

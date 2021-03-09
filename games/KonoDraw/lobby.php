@@ -3,34 +3,8 @@ define('fromgames', true);
 define('GAMENAME', 'KonoDraw');
 include '../../website_parts/header.php';
 require_once '../../lobby/init.php';
+require_once '../../lobby/initcolyseuslobby.php';
 
-if(isset($_GET['ses']))
-{
-    if($_GET['ses'] === $_SESSION['lobby_' . GAMENAME])
-    {
-        $err = 1;
-    }
-    else
-    {
-        header("Location: index.php?ses=" . $_GET['ses']);
-        die();
-    }
-    
-}
-
-if(!isset($_SESSION['lobby_' . GAMENAME . '_aproved']))
-{
-    header('Location: index.php');
-    die();
-}
-
-if(isset($_SESSION['lobby_' . GAMENAME . '_invited']) && $_SESSION['lobby_' . GAMENAME . '_invited'])
-    $create = false;
-else
-    $create = true;
-
-$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-$actual_link .= '?ses=' . $_SESSION['lobby_' . GAMENAME];
 ?>
 <div class="main" style="height:90%;">
 <div class="centerlobby" style="font-family: 'DotGothic16', sans-serif;font-size:30px;">
@@ -59,7 +33,7 @@ $actual_link .= '?ses=' . $_SESSION['lobby_' . GAMENAME];
 if(!isset($err))
 {
 
-require_once '../../lobby/initcolyseus.php';
+
 ?>
 <br>
     <div class="playerscenter">
@@ -70,11 +44,16 @@ require_once '../../lobby/initcolyseus.php';
     </div>
 
 
-    <div class="centerbutton">
+    <div id="start_game" class="centerbutton" style="display:none;">
         <button type="button">START</button>
     </div>
+    <div id="waiting_message" class="centerlobby" style="font-family: 'DotGothic16', sans-serif;font-size:30px;display:none;" >
+        <p>Waiting for host to start the game.</p>
+    </div>
 
-<?php 
+    <?php
+
+    require_once '../../lobby/initcolyseus.php';
 }
 ?>
 

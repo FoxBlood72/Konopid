@@ -23,7 +23,8 @@ exports.KonoDrawRoom = class extends colyseus.Room {
                     client.send('new_player_lobby', clnt.nickname);
             });
             this.broadcast("new_player_lobby", client.nickname, { except: client });
-            
+            if(this.ownerid !== client.sessionId)
+                client.send("not_owner", undefined);
         }
         else
         {
@@ -32,10 +33,12 @@ exports.KonoDrawRoom = class extends colyseus.Room {
     }
   
     onLeave (client, consented) {
+        
 
         if(client.sessionId === this.ownerid && this.clients.length > 0)
         {
             this.ownerid = this.clients[0].sessionId;
+            this.clients[0].send("owner_it", undefined);
         }
 
         if(this.onlobby)
