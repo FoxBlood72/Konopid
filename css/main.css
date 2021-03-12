@@ -163,7 +163,7 @@
 }
 
 .custom-input input:focus,
-input:not(:placeholder-shown) {
+.custom-input input:not(:placeholder-shown) {
     border-bottom: solid 3px rgb(172, 0, 37);
     outline: none;
     padding: 20px 5px 5px;

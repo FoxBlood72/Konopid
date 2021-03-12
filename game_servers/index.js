@@ -1,6 +1,6 @@
 const colyseus = require("colyseus");
 const port = 2567;
-const KonoDrawRoom = require('./rooms/KonoDraw').KonoDrawRoom;
+const KonoDrawRoom = require('./rooms/KonoDrawRoom/KonoDraw').KonoDrawRoom;
 
 console.log("[INFO] Trying to start the server...");
 const gameServer = new colyseus.Server();

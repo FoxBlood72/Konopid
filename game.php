@@ -1,5 +1,7 @@
 <?php 
-include 'website_parts/header.php';
+define('fromgames', true);
+include '../../website_parts/header.php';
+
 ?>
 
 <div class="main">
@@ -14,5 +16,5 @@ include 'website_parts/header.php';
 </div>
 
 <?php 
-include 'website_parts/footer.php';
+include '../../website_parts/footer.php';
 ?>

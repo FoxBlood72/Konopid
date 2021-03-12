@@ -6,7 +6,7 @@ require_once '../../lobby/init.php';
 require_once '../../lobby/initcolyseuslobby.php';
 
 ?>
-<div class="main" style="height:90%;">
+<div class="main" style="height:90%;" id="content">
 <div class="centerlobby" style="font-family: 'DotGothic16', sans-serif;font-size:30px;">
 <?php 
     if(isset($err) && $err === 1)
@@ -45,11 +45,13 @@ if(!isset($err))
 
 
     <div id="start_game" class="centerbutton" style="display:none;">
-        <button type="button">START</button>
+        <button type="button" onClick="sendStartGame()">START</button>
     </div>
     <div id="waiting_message" class="centerlobby" style="font-family: 'DotGothic16', sans-serif;font-size:30px;display:none;" >
         <p>Waiting for host to start the game.</p>
     </div>
+
+    
 
     <?php
 
