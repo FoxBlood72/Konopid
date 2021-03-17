@@ -8,6 +8,6 @@ apanel/*
 config.php
 !apanel/admin.php
 !apanel/webparts
-game.php
-script.js
+/game.php
+/script.js
 
