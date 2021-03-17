@@ -35,6 +35,13 @@ exports.KonoDrawRoom = class extends colyseus.Room {
             this.broadcast("clear_table_signal", undefined);
         });
 
+        this.onMessage("send_msg", (client, data) => {
+            if(this.onlobby)
+                return;
+            
+            this.broadcast("message_received", data);
+        });
+
     }
 
     onJoin (client, options) {

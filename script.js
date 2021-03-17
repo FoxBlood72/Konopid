@@ -28,27 +28,63 @@ let pen = {
     pencolor: ""
 }
 
+// handle responsively resizing the canvas   
+
+var scale=1.00;
+var originalWindowWidth = screen.width;
+var originalCanvasWidth = $('#canv').width();
+function debounce(func, wait, immediate) {
+  var timeout;
+  return function() {
+    var context = this, args = arguments;
+    var later = function() {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
+};
+var resizeCanvas = debounce(function() {
+  scale=window.innerWidth/originalWindowWidth;
+  $('#canv').css('width', originalCanvasWidth*scale);
+  $('#chat').css('height', $('#canv').height());
+}, 100);
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+// now, do normal app stuff
+
 canv.addEventListener('mousedown', (event) => {
+
+    var rect = canv.getBoundingClientRect();
+    var realX = parseInt((event.offsetX - rect.left)/scale);
+    var realY = event.offsetY / scale; // we modify just width based on BoundingClientRect
+
+    
     pen.down = true;
     pen.prevx = pen.x;
     pen.prevy = pen.y;
-    pen.x = event.offsetX;
-    pen.y = event.offsetY;
+    pen.x = realX;
+    pen.y = realY;
 });
 
 canv.addEventListener('mousemove', (event) => {
     if(!pen.down)
         return;
 
-    
+    var rect = canv.getBoundingClientRect();
+    var realX = parseInt((event.offsetX - rect.left)/scale);
+    var realY = event.offsetY / scale;
+    console.log(realX + ", " + realY);
 
-    
     pen.lineWidth = parseInt(penwidth.value);
     pen.pencolor = penCol.value;
     pen.prevx = pen.x;
     pen.prevy = pen.y;
-    pen.x = event.offsetX;
-    pen.y = event.offsetY;
+    pen.x = realX;
+    pen.y = realY;
 
     ctx.lineWidth = pen.lineWidth ;
     ctx.beginPath();
@@ -56,7 +92,7 @@ canv.addEventListener('mousemove', (event) => {
     ctx.moveTo(pen.prevx, pen.prevy);
     ctx.lineTo(pen.x, pen.y);
     ctx.stroke();
-    console.log("here everything goes nice");
+    
     //sendPenStatus();
 });
 

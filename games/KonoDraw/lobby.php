@@ -8,6 +8,7 @@ require_once '../../lobby/initcolyseuslobby.php';
 ?>
 <div class="main" style="height:90%;" id="content">
 <div class="centerlobby" style="font-family: 'DotGothic16', sans-serif;font-size:30px;">
+<!-- <script src="smooth-curve.js"></script> -->
 <?php 
     if(isset($err) && $err === 1)
     {
